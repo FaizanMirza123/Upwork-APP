@@ -2,6 +2,28 @@ from pydantic import BaseModel
 from datetime import datetime
 
 
+# ── Auth ─────────────────────────────────────────────────────
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class UserOut(BaseModel):
+    id: int
+    username: str
+    email: str
+    full_name: str
+    role: str
+
+    model_config = {"from_attributes": True}
+
+
+# ── Orders ───────────────────────────────────────────────────
 class OrderItemBase(BaseModel):
     product_name: str
     quantity: int
